@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * LeadService interface for managing lead operations.
+ */
 public interface LeadService {
 
     LeadDTO saveLead(LeadDTO leadDTO);
