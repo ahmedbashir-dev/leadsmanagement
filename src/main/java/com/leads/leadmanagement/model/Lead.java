@@ -1,4 +1,4 @@
-package model;
+package com.leads.leadmanagement.model;
 
 
 import jakarta.persistence.*;

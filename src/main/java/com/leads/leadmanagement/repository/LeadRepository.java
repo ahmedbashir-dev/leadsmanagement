@@ -1,6 +1,6 @@
-package repository;
+package com.leads.leadmanagement.repository;
 
-import model.Lead;
+import com.leads.leadmanagement.model.Lead;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
