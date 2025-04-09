@@ -2,12 +2,11 @@ package com.leads.leadmanagement.controller;
 
 import com.leads.leadmanagement.dto.LeadDTO;
 import com.leads.leadmanagement.service.LeadService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 
@@ -24,5 +23,11 @@ public class LeadController {
     public ResponseEntity<List<LeadDTO>> getAllLeads(){
         List<LeadDTO> leads = leadService.getAllLeads();
         return new ResponseEntity<>(leads, HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<LeadDTO> createLead(@Valid @RequestBody LeadDTO leadDTO){
+        LeadDTO createdLead = leadService.saveLead(leadDTO);
+        return new ResponseEntity<>(createdLead, HttpStatus.CREATED);
     }
 }

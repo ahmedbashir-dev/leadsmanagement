@@ -16,5 +16,5 @@ public class LeadDTO {
     private String phoneNumber;
     private String company;
     private String notes;
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 }
