@@ -7,6 +7,10 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * Represents a Lead entity in the system.
+ * This class is mapped to the "leads" table in the database and stores details of a potential customer.
+ */
 @Data
 @Entity
 @NoArgsConstructor

@@ -9,6 +9,9 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * Data Transfer Object (DTO) for representing lead information.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
