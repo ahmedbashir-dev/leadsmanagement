@@ -8,13 +8,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
-    @Value("${frontend.url}")
-    private String frontendUrl;
+
 
     @Override
     public void addCorsMappings(CorsRegistry registry){
         registry.addMapping("/leads")
-                .allowedOrigins(frontendUrl)
+                .allowedOrigins("https://leads-management-fe.netlify.app/")
                 .allowedMethods("GET", "POST", "DELETE", "OPTIONS")
                 .allowedHeaders("*");
     }
