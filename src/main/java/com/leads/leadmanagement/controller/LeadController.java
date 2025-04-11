@@ -3,6 +3,7 @@ package com.leads.leadmanagement.controller;
 import com.leads.leadmanagement.dto.LeadDTO;
 import com.leads.leadmanagement.service.LeadService;
 import jakarta.validation.Valid;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,9 +34,13 @@ public class LeadController {
      * @return A {@link ResponseEntity} containing a list of {@link LeadDTO}s
      */
     @GetMapping
-    public ResponseEntity<List<LeadDTO>> getAllLeads(){
-        List<LeadDTO> leads = leadService.getAllLeads();
-        return new ResponseEntity<>(leads, HttpStatus.OK);
+    public ResponseEntity<?> getAllLeads(){
+        try {
+            List<LeadDTO> leads = leadService.getAllLeads();
+            return new ResponseEntity<>(leads, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Failed to retrieve leads", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
@@ -45,8 +50,14 @@ public class LeadController {
      * @return A {@link ResponseEntity} containing the created {@link LeadDTO}.
      */
     @PostMapping
-    public ResponseEntity<LeadDTO> createLead(@Valid @RequestBody LeadDTO leadDTO){
-        LeadDTO createdLead = leadService.saveLead(leadDTO);
-        return new ResponseEntity<>(createdLead, HttpStatus.CREATED);
+    public ResponseEntity<?> createLead(@Valid @RequestBody LeadDTO leadDTO) {
+        try {
+            LeadDTO createdLead = leadService.saveLead(leadDTO);
+            return new ResponseEntity<>(createdLead, HttpStatus.CREATED);
+        } catch (DataIntegrityViolationException e) {
+            return new ResponseEntity<>("Duplicate entry or invalid data", HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error creating lead", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
